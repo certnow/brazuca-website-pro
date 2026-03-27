@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brazuca - Sabores de Brasil | Milho no Pote & Hambúrgueres Artesanais</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ===== HEADER/NAV ===== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid rgba(255, 193, 7, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFC107 0%, #FF9800 50%, #4CAF50 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #FFC107, #FF9800);
+            transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            margin-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d2d0d 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 193, 7, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -400px;
+            right: -400px;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -300px;
+            left: -300px;
+            animation: float 12s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-40px) rotate(10deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            animation: slideUp 0.9s ease-out;
+            max-width: 900px;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #FFC107 0%, #FF9800 50%, #4CAF50 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #ddd;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1.3rem 3rem;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.4s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+            color: #000;
+            box-shadow: 0 15px 40px rgba(255, 193, 7, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(255, 193, 7, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 3px solid #FFC107;
+            color: #FFC107;
+        }
+
+        .btn-secondary:hover {
+            background: #FFC107;
+            color: #000;
+            transform: translateY(-6px);
+        }
+
+        /* ===== MENU SECTION ===== */
+        .menu {
+            padding: 8rem 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            margin-bottom: 5rem;
+            background: linear-gradient(135deg, #FFC107 0%, #FF9800 50%, #4CAF50 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3.5rem;
+        }
+
+        .menu-card {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.08) 0%, rgba(76, 175, 80, 0.08) 100%);
+            border: 2px solid rgba(255, 193, 7, 0.2);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-20px);
+            border-color: #FFC107;
+            box-shadow: 0 25px 60px rgba(255, 193, 7, 0.3);
+        }
+
+        .menu-card:hover::before {
+            opacity: 1;
+        }
+
+        .menu-card-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .menu-card:hover .menu-card-image {
+            transform: scale(1.08);
+        }
+
+        .menu-card-content {
+            padding: 2.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #FFC107;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .menu-card p {
+            color: #bbb;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #4CAF50;
+            margin-top: auto;
+            letter-spacing: 1px;
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            text-align: center;
+            border-top: 2px solid #FFC107;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            font-size: 1.3rem;
+            color: #ddd;
+            margin-bottom: 4rem;
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            flex: 1;
+            min-width: 250px;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.08) 0%, rgba(76, 175, 80, 0.08) 100%);
+            border: 2px solid rgba(255, 193, 7, 0.2);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .contact-item:hover {
+            border-color: #FFC107;
+            box-shadow: 0 15px 40px rgba(255, 193, 7, 0.2);
+            transform: translateY(-8px);
+        }
+
+        .contact-item p {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-item a {
+            color: #FFC107;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .contact-item a:hover {
+            color: #FF9800;
+            transform: scale(1.05);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #000;
+            padding: 3rem;
+            text-align: center;
+            color: #666;
+            border-top: 2px solid #FFC107;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">🌽 Brazuca</div>
+            <ul class="nav-links">
+                <li><a href="#menu">Cardápio</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Sabores de Brasil</h1>
+            <p>Milho no Pote Cremoso & Hambúrgueres Artesanais</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/5561992278585" class="btn btn-primary">🍔 Pedir Agora</a>
+                <a href="#menu" class="btn btn-secondary">Ver Cardápio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section class="menu" id="menu">
+        <h2 class="section-title">Nosso Cardápio</h2>
+        <div class="menu-grid">
+            <!-- Card 1 -->
+            <div class="menu-card">
+                <img src="https://d2xsxph8kpxj0f.cloudfront.net/93847495/8JyEi2jMvHYcEFXMpka2qC/brazuca-milho-premium-PuYUBLBDvFyWtqQEZZ6ncx.webp" alt="Milho no Pote Premium" class="menu-card-image">
+                <div class="menu-card-content">
+                    <h3>🌽 Milho Premium</h3>
+                    <p>Base cremosa com milho fresco, manteiga derretida, queijo ralado, bacon crocante e tempero especial.</p>
+                    <div class="price">R$ 12,90</div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="menu-card">
+                <img src="https://d2xsxph8kpxj0f.cloudfront.net/93847495/8JyEi2jMvHYcEFXMpka2qC/brazuca-burger-premium-8KvtwpE8YX8Vrg8jCoj5XD.webp" alt="Smash Brazuca" class="menu-card-image">
+                <div class="menu-card-content">
+                    <h3>🍔 Smash Brazuca</h3>
+                    <p>Pão tostado, carne suculenta, queijo derretido, bacon crocante, alface fresca e molho especial.</p>
+                    <div class="price">R$ 19,90</div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="menu-card">
+                <img src="https://d2xsxph8kpxj0f.cloudfront.net/93847495/8JyEi2jMvHYcEFXMpka2qC/brazuca-combo-premium-AwmG64rE92TxJUCSeKUR3p.webp" alt="Combo Explosão" class="menu-card-image">
+                <div class="menu-card-content">
+                    <h3>🍟 Combo Explosão</h3>
+                    <p>Milho premium + Hambúrguer artesanal + Batata frita crocante + Bebida gelada + Molho especial.</p>
+                    <div class="price">R$ 34,90</div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="menu-card">
+                <img src="https://d2xsxph8kpxj0f.cloudfront.net/93847495/8JyEi2jMvHYcEFXMpka2qC/brazuca-milho-premium-PuYUBLBDvFyWtqQEZZ6ncx.webp" alt="Monte Seu Brazuca" class="menu-card-image">
+                <div class="menu-card-content">
+                    <h3>✨ Monte Seu Brazuca</h3>
+                    <p>Personalize seu milho com 3 toppings à escolha: manteiga, queijo, bacon, alho, cilantro e mais!</p>
+                    <div class="price">R$ 15,90</div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="menu-card">
+                <img src="https://d2xsxph8kpxj0f.cloudfront.net/93847495/8JyEi2jMvHYcEFXMpka2qC/brazuca-burger-premium-8KvtwpE8YX8Vrg8jCoj5XD.webp" alt="Smash Bacon" class="menu-card-image">
+                <div class="menu-card-content">
+                    <h3>🥓 Smash Bacon</h3>
+                    <p>Dupla de carnes suculentas, bacon crocante, queijo derretido, alface, tomate e molho especial.</p>
+                    <div class="price">R$ 21,90</div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="menu-card">
+                <img src="https://d2xsxph8kpxj0f.cloudfront.net/93847495/8JyEi2jMvHYcEFXMpka2qC/brazuca-combo-premium-AwmG64rE92TxJUCSeKUR3p.webp" alt="Bebidas" class="menu-card-image">
+                <div class="menu-card-content">
+                    <h3>🥤 Bebidas Geladas</h3>
+                    <p>Refrigerante, suco natural, água, cerveja gelada e muito mais. Perfeito para acompanhar!</p>
+                    <div class="price">A partir de R$ 4,90</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contato">
+        <h2 class="section-title">Entre em Contato</h2>
+        <div class="contact-content">
+            <p>Estamos prontos para servir você com o melhor da culinária brasileira! Faça seu pedido agora e experimente sabores inesquecíveis.</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <p>📱 WhatsApp</p>
+                    <a href="https://wa.me/5561992278585">(61) 99227-8585</a>
+                </div>
+                <div class="contact-item">
+                    <p>📸 Instagram</p>
+                    <a href="https://instagram.com/brazuca_bsb">@brazuca_bsb</a>
+                </div>
+                <div class="contact-item">
+                    <p>🍔 iFood</p>
+                    <a href="#">Peça Agora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Brazuca - Sabores de Brasil 🌽 | Todos os direitos reservados. Feito com ❤️</p>
+    </footer>
+</body>
+</html>
